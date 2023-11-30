@@ -5,7 +5,7 @@
     </div>
     <div class="logo">
       <img src="/img/logo.png">
-      Polly polling tool 
+      Polly polling tool test från Agnes
       <img src="../assets/logo.svg">
     </div>
   </header>
