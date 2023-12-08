@@ -9,7 +9,6 @@
 
     <!-- <button v-on:click="instructions-button"> </button> !-->
   </div> 
-
 </template>
 
 <script>
