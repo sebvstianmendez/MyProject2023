@@ -1,6 +1,5 @@
 {
-	"sales-pitch": "Simply. Great. Polling.",
-	"subHeading": "A simple polling tool",
+	"subHeading": "Are you a Zero or a Hero?",
 	"invite": "Invite participants with this link:",
 	"createPoll": "Create poll",
 	"participatePoll": "Participate in poll",
@@ -8,4 +7,4 @@
 	"answer": "Answer",
 	"changeLanguage": "Byt till svenska",
 	"about": "About"
-}
+} 
