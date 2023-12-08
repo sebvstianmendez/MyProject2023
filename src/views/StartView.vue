@@ -1,118 +1,124 @@
 <template>
-  <header>
-    <div v-bind:class="['hamburger', {'close': !hideNav}]" 
-         v-on:click="toggleNav">
-    </div>
-    <div class="logo">
-      <img src="/img/logo.png">
-      Polly polling tool 
-      <img src="../assets/logo.svg">
-    </div>
-  </header>
-  <ResponsiveNav v-bind:hideNav="hideNav">
-    <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
-    <router-link to="/create/">{{uiLabels.createPoll}}</router-link>
-    <a href="">{{uiLabels.about}}</a>
-    <a href="">FAQ</a>
-  </ResponsiveNav>
-  <h1>{{ uiLabels["sales-pitch"] }}</h1>
-  <h2>{{ uiLabels.subHeading }}</h2>
-  <label>
-    Write poll id: 
-    <input type="text" v-model="id">
-  </label>
-  <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+  <div class="start-view">
+    <h1 class="game-title">0-100</h1>
+    <h2 class="subheading">{{ uiLabels.subHeading }}</h2>
+    <button class="start-button" @click="startGame">Start game</button>
+
+    <button class="instructions-button" @click="instructions"><router-link v-bind:to="'/instructions/'" > How to play</router-link></button>
+  
+
+    <!-- <button v-on:click="instructions-button"> </button> !-->
+  </div> 
 </template>
 
 <script>
-import ResponsiveNav from '@/components/ResponsiveNav.vue';
-import io from 'socket.io-client';
+import ResponsiveNav from "@/components/ResponsiveNav.vue";
+import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: 'StartView',
+  name: "StartView",
   components: {
-    ResponsiveNav
+    ResponsiveNav,
   },
   data: function () {
     return {
       uiLabels: {},
       id: "",
       lang: localStorage.getItem("lang") || "en",
-      hideNav: true
-    }
+      hideNav: true,
+    };
   },
   created: function () {
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
-      this.uiLabels = labels
-    })
+      this.uiLabels = labels;
+    });
   },
   methods: {
-    switchLanguage: function() {
+    switchLanguage: function () {
       if (this.lang === "en") {
-        this.lang = "sv"
-      }
-      else {
-        this.lang = "en"
+        this.lang = "sv";
+      } else {
+        this.lang = "en";
       }
       localStorage.setItem("lang", this.lang);
-      socket.emit("switchLanguage", this.lang)
+      socket.emit("switchLanguage", this.lang);
     },
     toggleNav: function () {
-      this.hideNav = ! this.hideNav;
+      this.hideNav = !this.hideNav;
+    },
+    startGame: function () {
+      // Should redirect to the next Game-page
+      alert("Game started!");
+    },
+    instructions: function () {
+      // Should redirect to an instructions page
     }
-  }
-}
+  },
+};
 </script>
-<style scoped>
-  header {
-    background-color: gray;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 2em auto;
-  }
-  .logo {
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 2.5rem;
-    color: white;
-    padding-top:0.2em;
-  }
-  .logo img {
-    height:2.5rem;
-    vertical-align: bottom;
-    margin-right: 0.5rem; 
-  }
-  .hamburger {
-    color:white;
-    width:1em;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    padding:0.5rem;
-    top:0;
-    left:0;
-    height: 2rem;
-    cursor: pointer;
-    font-size: 1.5rem;
-  }
 
-@media screen and (max-width:50em) {
-  .logo {
-    font-size: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hamburger::before {
-    content: "☰";
-  }
-  .close::before {
-    content: "✕";
-  }
-  .hide {
-    left:-12em;
-  }
+<style scoped>
+.start-view {
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
+
+.game-title {
+  color: black;
+  font-size: 200px;
+  margin-bottom: -70px;
+  position: center;
+  margin-top: -7px;
+}
+
+.game-title:hover {
+  cursor: default;
+}
+.subheading {
+  margin-bottom: 60px;
+  padding: 50px;
+}
+
+.subheading:hover {
+  cursor: default;
+}
+
+.start-button {
+  padding: 20px 20px;
+  font-size: 1.5em;
+  background-color: darkorange;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.instructions-button {
+  top: 30px;
+  right: 40px;
+  padding: 10px 20px;
+  font-size: 1em;
+  position: absolute;
+  background-color: red;
+  
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.start-button:hover {
+  background-color: #F05E16;
+}
+
+.instructions-button:hover {
+  background-color: #B80F0A;
+}
+
 </style>
