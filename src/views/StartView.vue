@@ -63,6 +63,7 @@ export default {
 <style scoped>
 .start-view {
   background-color: orange;
+  color: rgb(28, 28, 28);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,7 +72,7 @@ export default {
 }
 
 .game-title {
-  color: black;
+  color: rgb(28, 28, 28);
   font-size: 200px;
   margin-bottom: -70px;
   position: center;
