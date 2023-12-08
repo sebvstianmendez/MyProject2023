@@ -28,6 +28,10 @@
     {{data}}
     <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
   </div>
+  <input type="text" v-model="testText">
+  <button v-on:click="testpage">
+    <router-link v-bind:to="'/testpage/'"> send me</router-link> 
+  </button>
 </template>
 
 <script>
@@ -71,7 +75,14 @@ export default {
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+    },
+    testpage: function(){
+      socket.emit("testSend", {text: this.testText})    
     }
+
   }
 }
 </script>
+
+<style>
+</style>
